@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful) {
                         //val post = response.body()
-                        println("we got a responds")
+                        println("we got a response")
                         // Handle the retrieved post data
                     } else {
                         println("we did not get a successful response")
