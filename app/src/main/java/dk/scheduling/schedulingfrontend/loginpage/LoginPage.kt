@@ -35,7 +35,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LoginPage(modifier: Modifier = Modifier, navigateOnValidLogin: () -> Unit, navigateToSignUpPage: () -> Unit) {
+fun LoginPage(
+    modifier: Modifier = Modifier,
+    navigateOnValidLogin: () -> Unit,
+    navigateToSignUpPage: () -> Unit,
+) {
     var username by remember {
         mutableStateOf("")
     }
@@ -49,24 +53,31 @@ fun LoginPage(modifier: Modifier = Modifier, navigateOnValidLogin: () -> Unit, n
         mutableStateOf(false)
     }
 
-    Column(modifier = modifier
-        .fillMaxSize()
-        .padding(50.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+    Column(
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(50.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
         Column {
             TextLabel("Username")
-            TextField(value = username,
+            TextField(
+                value = username,
                 onValueChange = {
                     username = it
                     if (loginFail) loginFail = false
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(
-                        color = if (loginFail) MaterialTheme.colorScheme.error else Color.Black,
-                        width = 1.dp
-                    ),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .border(
+                            color = if (loginFail) MaterialTheme.colorScheme.error else Color.Black,
+                            width = 1.dp,
+                        ),
                 singleLine = true,
-                )
+            )
         }
         Spacer(modifier = Modifier.height(20.dp))
         Column {
@@ -78,29 +89,32 @@ fun LoginPage(modifier: Modifier = Modifier, navigateOnValidLogin: () -> Unit, n
                     if (loginFail) loginFail = false
                 },
                 visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(
-                        color = if (loginFail) MaterialTheme.colorScheme.error else Color.Black,
-                        width = 1.dp
-                    ),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .border(
+                            color = if (loginFail) MaterialTheme.colorScheme.error else Color.Black,
+                            width = 1.dp,
+                        ),
                 trailingIcon = {
                     PasswordVisibilityToggleIcon(
                         showPassword = showPassword,
-                        onTogglePasswordVisibility = { showPassword = !showPassword })
-            })
+                        onTogglePasswordVisibility = { showPassword = !showPassword },
+                    )
+                },
+            )
         }
 
-
-        if(loginFail){
+        if (loginFail) {
             Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = "Wrong username or password",
                 color = MaterialTheme.colorScheme.error,
-                style = TextStyle(
-                    fontSize = 15.sp,
-                ))
-
+                style =
+                    TextStyle(
+                        fontSize = 15.sp,
+                    ),
+            )
         }
 
         Spacer(modifier = Modifier.height(30.dp))
@@ -109,8 +123,7 @@ fun LoginPage(modifier: Modifier = Modifier, navigateOnValidLogin: () -> Unit, n
             Button(onClick = {
                 if (login(username, password)) {
                     navigateOnValidLogin()
-                }
-                else {
+                } else {
                     loginFail = true
                 }
             }, modifier = Modifier.fillMaxWidth()) {
@@ -119,11 +132,14 @@ fun LoginPage(modifier: Modifier = Modifier, navigateOnValidLogin: () -> Unit, n
         }
     }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(50.dp),
+    Column(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(50.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom) {
+        verticalArrangement = Arrangement.Bottom,
+    ) {
         Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
             Text("Don't have an account?")
             TextButton(onClick = { navigateToSignUpPage() }) { Text("Sign Up") }
@@ -133,16 +149,19 @@ fun LoginPage(modifier: Modifier = Modifier, navigateOnValidLogin: () -> Unit, n
 
 @Composable
 fun TextLabel(label: String) {
-    Text(label,
-        style = TextStyle(
-            fontSize = 15.sp,
-        ))
+    Text(
+        label,
+        style =
+            TextStyle(
+                fontSize = 15.sp,
+            ),
+    )
 }
 
 @Composable
 fun PasswordVisibilityToggleIcon(
     showPassword: Boolean,
-    onTogglePasswordVisibility: () -> Unit
+    onTogglePasswordVisibility: () -> Unit,
 ) {
     val image = if (showPassword) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
     val contentDescription = if (showPassword) "Hide password" else "Show password"
@@ -152,11 +171,13 @@ fun PasswordVisibilityToggleIcon(
     }
 }
 
-fun login(username: String, password: String) : Boolean {
-    /* TODO: Send to server and if the login is valid return true */
+fun login(
+    username: String,
+    password: String,
+): Boolean {
+    // TODO: Send to server and if the login is valid return true
     return false
 }
-
 
 @Preview(showBackground = true, device = "spec:id=reference_phone,shape=Normal,width=411,height=891,unit=dp,dpi=420")
 @Composable

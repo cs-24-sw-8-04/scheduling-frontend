@@ -1,4 +1,4 @@
-package dk.scheduling.schedulingfrontend.API
+package dk.scheduling.schedulingfrontend.api
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -19,11 +19,22 @@ object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:2222/"
     private val gson = GsonBuilder().setLenient().create()
     private val okHttpClient: OkHttpClient by lazy {
-        val trustAllCertificates = arrayOf<TrustManager>(object : X509TrustManager {
-            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
-            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
-            override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
-        })
+        val trustAllCertificates =
+            arrayOf<TrustManager>(
+                object : X509TrustManager {
+                    override fun checkClientTrusted(
+                        chain: Array<out X509Certificate>?,
+                        authType: String?,
+                    ) {}
+
+                    override fun checkServerTrusted(
+                        chain: Array<out X509Certificate>?,
+                        authType: String?,
+                    ) {}
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
+                },
+            )
 
         val sslContext = SSLContext.getInstance("SSL")
         sslContext.init(null, trustAllCertificates, SecureRandom())
@@ -43,8 +54,6 @@ object RetrofitClient {
             .build()
     }
 }
-
-
 
 object ApiClient {
     val apiService: ApiService by lazy {
