@@ -26,7 +26,7 @@ import dk.scheduling.schedulingfrontend.pagesInfo
 
 @Composable
 fun App() {
-    var currentPage by remember { mutableStateOf(Page.Home) }
+    var currentPage by remember { mutableStateOf(Page.HomePage) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Content of the current page
@@ -49,7 +49,7 @@ fun App() {
 fun BottomNavigationBarPreview() {
     Box(modifier = Modifier.height(56.dp)) { // Adjust the height as needed
         BottomNavigationBar(
-            currentPage = Page.Home,
+            currentPage = Page.HomePage,
             onPageSelected = { },
             modifier = Modifier.align(Alignment.BottomCenter),
         )
