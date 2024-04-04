@@ -44,7 +44,7 @@ fun App() {
     }
 }
 
-@Preview
+@Preview(showBackground = true, device = "spec:id=reference_phone,shape=Normal,width=411,height=891,unit=dp,dpi=420")
 @Composable
 fun BottomNavigationBarPreview() {
     Box(modifier = Modifier.height(56.dp)) { // Adjust the height as needed
@@ -93,7 +93,7 @@ fun BottomNavigationButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true, device = "spec:id=reference_phone,shape=Normal,width=411,height=891,unit=dp,dpi=420")
 @Composable
 fun PreviewApp() {
     App()
