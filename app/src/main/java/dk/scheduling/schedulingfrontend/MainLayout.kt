@@ -1,41 +1,28 @@
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import dk.scheduling.schedulingfrontend.ApiButton
-
-
-enum class Page {
-    Home,
-    PAGE_2,
-    PAGE_3
-}
-
-data class PageInfo(
-    val page: Page,
-    val icon: ImageVector,
-    val composable: @Composable () -> Unit
-)
-
-
-val pagesInfo = listOf(
-    PageInfo(Page.Home, Icons.Default.Home) { Page1() },
-    PageInfo(Page.PAGE_2, Icons.Default.Favorite) { ApiButton() },
-    PageInfo(Page.PAGE_3, Icons.Default.Settings) { Page3() }
-)
+import androidx.compose.ui.unit.dp
+import dk.scheduling.schedulingfrontend.HomePage
+import dk.scheduling.schedulingfrontend.Page
+import dk.scheduling.schedulingfrontend.pagesInfo
 
 @Composable
 fun App() {
@@ -44,7 +31,7 @@ fun App() {
     Box(modifier = Modifier.fillMaxSize()) {
         // Content of the current page
         Column(modifier = Modifier.fillMaxSize()) {
-            pagesInfo.find { it.page == currentPage }?.composable?.invoke() ?: Page1() // Default to Page1 if not found
+            pagesInfo.find { it.page == currentPage }?.composable?.invoke() ?: HomePage() // Default to Page1 if not found
             Spacer(modifier = Modifier.weight(1f))
         }
 
@@ -52,22 +39,8 @@ fun App() {
         BottomNavigationBar(
             currentPage = currentPage,
             onPageSelected = { page -> currentPage = page },
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
-    }
-}
-
-@Composable
-fun Page1() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Page 1, click the heart to reach the api button!", fontSize = 24.sp)
-    }
-}
-
-@Composable
-fun Page3() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Page 3", fontSize = 24.sp)
     }
 }
 
@@ -78,23 +51,27 @@ fun BottomNavigationBarPreview() {
         BottomNavigationBar(
             currentPage = Page.Home,
             onPageSelected = { },
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
 }
 
 @Composable
-fun BottomNavigationBar(currentPage: Page, onPageSelected: (Page) -> Unit, modifier: Modifier = Modifier) {
+fun BottomNavigationBar(
+    currentPage: Page,
+    onPageSelected: (Page) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Surface(color = Color.Gray, modifier = modifier) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             pagesInfo.forEach { pageInfo ->
                 BottomNavigationButton(
                     icon = pageInfo.icon,
-                    isSelected = currentPage == pageInfo.page
+                    isSelected = currentPage == pageInfo.page,
                 ) { onPageSelected(pageInfo.page) }
             }
         }
@@ -105,13 +82,13 @@ fun BottomNavigationBar(currentPage: Page, onPageSelected: (Page) -> Unit, modif
 fun BottomNavigationButton(
     icon: ImageVector,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     IconButton(onClick = onClick) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = if (isSelected) Color.White else Color.Magenta
+            tint = if (isSelected) Color.White else Color.Magenta,
         )
     }
 }
