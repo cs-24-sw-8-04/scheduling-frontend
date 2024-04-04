@@ -211,7 +211,7 @@ fun signUp(
     password: String,
     homeAddress: String,
 ): Boolean {
-    // TODO: Send to server and if the login is valid return true
+    // TODO: Send to server and if the signup is valid return true
     return false
 }
 
