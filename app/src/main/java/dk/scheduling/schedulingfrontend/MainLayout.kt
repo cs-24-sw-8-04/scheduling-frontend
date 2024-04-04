@@ -31,7 +31,7 @@ fun App() {
     Box(modifier = Modifier.fillMaxSize()) {
         // Content of the current page
         Column(modifier = Modifier.fillMaxSize()) {
-            pagesInfo.find { it.page == currentPage }?.composable?.invoke() ?: HomePage() // Default to Page1 if not found
+            pagesInfo.find { it.page == currentPage }?.composable?.invoke() ?: HomePage() // Default to HomePage if not found
             Spacer(modifier = Modifier.weight(1f))
         }
 
