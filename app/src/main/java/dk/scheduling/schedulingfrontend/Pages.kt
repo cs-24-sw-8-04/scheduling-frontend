@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class Page {
-    Home,
-    PAGE_2,
+    HomePage,
+    ApiButtonPage,
     PAGE_3,
 }
 
@@ -21,7 +21,7 @@ data class PageInfo(
 
 val pagesInfo =
     listOf(
-        PageInfo(Page.Home, Icons.Default.Home) { HomePage() },
-        PageInfo(Page.PAGE_2, Icons.Default.Favorite) { ApiButton() },
+        PageInfo(Page.HomePage, Icons.Default.Home) { HomePage() },
+        PageInfo(Page.ApiButtonPage, Icons.Default.Favorite) { ApiButton() },
         PageInfo(Page.PAGE_3, Icons.Default.Settings) { Page3() },
     )
