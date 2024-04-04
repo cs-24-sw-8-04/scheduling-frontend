@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
@@ -19,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dk.scheduling.schedulingfrontend.HomePage
 import dk.scheduling.schedulingfrontend.Page
 import dk.scheduling.schedulingfrontend.pagesInfo
@@ -39,18 +37,6 @@ fun App() {
         BottomNavigationBar(
             currentPage = currentPage,
             onPageSelected = { page -> currentPage = page },
-            modifier = Modifier.align(Alignment.BottomCenter),
-        )
-    }
-}
-
-@Preview(showBackground = true, device = "spec:id=reference_phone,shape=Normal,width=411,height=891,unit=dp,dpi=420")
-@Composable
-fun BottomNavigationBarPreview() {
-    Box(modifier = Modifier.height(56.dp)) { // Adjust the height as needed
-        BottomNavigationBar(
-            currentPage = Page.HomePage,
-            onPageSelected = { },
             modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
